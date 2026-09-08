@@ -1,19 +1,23 @@
 import { useState, useEffect, type ChangeEvent } from "react";
 
 function AdvancedCounter() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState<number>(() => {
+    const savedCount = localStorage.getItem("count");
+    return savedCount ? parseInt(savedCount, 10) : 0;
+  });
   const [step, setStep] = useState(1);
   const [history, setHistory] = useState<number[]>([]);
 
-  useEffect(() => {
-    setHistory((prev) => [...prev, count]);
-  }, [count]);
   function handleAdd() {
-    setCount(count + step);
+    const newCount = count + step;
+    setCount(newCount);
+    setHistory((prev) => [...prev, newCount]);
   }
 
   function handleMinus() {
-    setCount(count - step);
+    const newCount = count - step;
+    setCount(newCount);
+    setHistory((prev) => [...prev, newCount]);
   }
 
   function handleReset() {
@@ -24,6 +28,10 @@ function AdvancedCounter() {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setStep(Number(e.target.value));
   };
+
+  useEffect(() => {
+    localStorage.setItem("count", count.toString());
+  }, [count]);
 
   return (
     <div>
@@ -46,9 +54,7 @@ function AdvancedCounter() {
       <h2>History</h2>
 
       {history.map((count) => (
-        <ul>
-          <h3 key={count}>{count}</h3>
-        </ul>
+        <li key={count}>{count}</li>
       ))}
     </div>
   );
