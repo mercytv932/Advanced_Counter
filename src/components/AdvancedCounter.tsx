@@ -12,6 +12,11 @@ function AdvancedCounter() {
     setCount(count - step);
   }
 
+  function handleReset() {
+    setCount(0);
+    setStep(0);
+  }
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setStep(Number(e.target.value));
   };
@@ -21,9 +26,10 @@ function AdvancedCounter() {
         Counter: <span>{count}</span>
       </h3>
 
-      <div>
+      <div className="buttons">
         <button onClick={handleAdd}>Add</button>
         <button onClick={handleMinus}>Minus</button>
+        <button onClick={handleReset}>Reset</button>
       </div>
 
       <input
