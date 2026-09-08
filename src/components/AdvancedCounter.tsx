@@ -33,6 +33,22 @@ function AdvancedCounter() {
     localStorage.setItem("count", count.toString());
   }, [count]);
 
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "ArrowUp") {
+        handleAdd();
+      } else if (event.key === "ArrowDown") {
+        handleMinus();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [count, step]);
+
   return (
     <div>
       <h3>
@@ -53,8 +69,8 @@ function AdvancedCounter() {
 
       <h2>History</h2>
 
-      {history.map((count) => (
-        <li key={count}>{count}</li>
+      {history.map((count, index) => (
+        <li key={index}>{count}</li>
       ))}
     </div>
   );
