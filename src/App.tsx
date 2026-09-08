@@ -3,7 +3,7 @@ import AdvancedCounter from "./components/AdvancedCounter";
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <AdvancedCounter />
     </div>
   );
