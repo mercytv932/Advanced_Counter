@@ -116,3 +116,11 @@ input::placeholder {
   font-size: 1.7rem;
   font-weight: 500;
 }
+
+h2 {
+  margin-top: 7px;
+}
+
+h4 {
+  margin-top: 21px;
+}

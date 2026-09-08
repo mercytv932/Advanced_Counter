@@ -67,11 +67,14 @@ function AdvancedCounter() {
         onChange={handleChange}
       />
 
-      <h2>History</h2>
+      <h2>Count History</h2>
+      <hr />
 
       {history.map((count, index) => (
         <li key={index}>{count}</li>
       ))}
+
+      <h4>Use ArrowUp to increment and ArrowDown to decrement.</h4>
     </div>
   );
 }
